@@ -1,78 +1,50 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Mi pagina Feliz</title>
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-<body>
+<body class="p-4">
   <h1>Formulario</h1>
-  223yit
   <form id="idFormulario">
-    <label for="">Nombre:</label>
-    <input type="text" required>
-    <br>
-    <br>
-  
-    <label for="">Folio:</label>
-    <input id="idLetra" type="text" required>
-    
-    <input id="idNumero" type="text" required>
+    <div class="mb-3">
+      <label>Nombre:</label>
+      <input type="text" class="form-control" required>
+    </div>
 
-   <!-- <input type="text" required pattern="\d{3}-[a-zA-Z]{3}"> -->
-    <br>
-    <br>
-    <label for="">Edad:</label>
-    <input type="text" required pattern="\d">
-    <br>
-    <br>
-    <label for="">Sexo:</label>
-    <input type="text" required>
-    <br>
-    <br>
-    <button id="idButon" type="button" class="btn btn-primary" onclick="enviarInfo()" >Enviar</button>
+    <div class="mb-3">
+      <label>Folio:</label>
+      <div class="d-flex gap-2 align-items-center">
+        <input id="idNumero" type="text" class="form-control w-auto" maxlength="3"  required>
+        <span>-</span>
+        <input id="idLetra" type="text" class="form-control w-auto" maxlength="3"  required>
+      </div>
+    </div>
 
+    <div class="mb-3">
+      <label>Edad:</label>
+      <input type="text" class="form-control" pattern="\d+" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Sexo:</label>
+      <input type="text" class="form-control" required>
+    </div>
+
+    <button id="idButon" type="button" class="btn btn-primary" onclick="enviarInfo()">Enviar</button>
   </form>
 
   <script>
-    function enviarInfo(){
-     let folioLetras = document.getElementById("idLetra").value
-     let folioNumeros = document.getElementById("idNumero").value
-
-     let contadorNumeros = 0
-     let contadorLetras = 0
-
-
-     for(let i = 0; i < folioLetras.length; i++){
-       
-      
-       if( folioLetras[i].toLowerCase() != folioLetras[i].toUpperCase()){
-         contadorLetras = contadorLetras + 1;
-         
-       }
-     }
-
-     for(let i = 0; i < folioNumeros.length; i++){
-       
-        if( folioNumeros[i].toLowerCase() != folioNumeros[i].toUpperCase()){
-          contadorNumeros = contadorNumeros + 1;
-          
-        }
-      }
-      
-      if(contadorNumeros< 3 && contadorLetras <3){
-        alert("El folio  es valido")
-
-       }else{
-        alert("El folio no es valido")
-         
-
-       }
-   
-     }
-    
-     
-
+    function enviarInfo() {
+      let letras = document.getElementById("idLetra").value.trim();
+      let numeros = document.getElementById("idNumero").value.trim();
+      const msg = "El folio no es valido"
+       const msg2 = "El folio  es valido"
+      const regexNumeros = /^\d{3}$/;
+      const regexLetras = /^[a-zA-Z]{3}$/;
+      regexNumeros.test(numeros) && regexLetras.test(letras) ? alert(msg2) : alert(msg);
+    }
   </script>
 </body>
 </html>
