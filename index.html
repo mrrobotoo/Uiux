@@ -1,68 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>formulario tarea</title>
-  <!-- Carga Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <title>Mi pagina Feliz</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-  <div class="container mt-4">
-    <h1>Formulario empleadoooo</h1>
-
-    <form id="idFormulario">
-      <!-- Nombre -->
+<body class="p-4">
+  <h1>Formulario</h1>
+  <form id="idFormulario">
+    <div class="mb-3">
       <label>Nombre:</label>
-      <input type="text" class="form-control form-control-sm" required>
-
-      <!-- Folio -->
-      <label class="mt-3">Folio:</label><br>
-      <input id="folio1" type="text" maxlength="3" class="form-control d-inline w-25" placeholder= ""required>
-      <input id="folio2" type="text" maxlength="3" class="form-control d-inline w-25 ms-2" placeholder="" required>
-<br>
-      <!-- Edad -->
-      <label class="mt-3">Edad:</label>
-      <input type="text" class="form-control" required pattern="\d+">
-
-      <!-- Sexo -->
-      <label class="mt-3">Sexo:</label>
       <input type="text" class="form-control" required>
+    </div>
 
-      <!-- Botones -->
-      <div class="mt-4">
-        <button type="button" class="btn btn-primary" onclick="enviarInfo()">Enviar</button>
-        <button type="button" class="btn btn-outline-danger" onclick="eliminarInfo()">Refrescar</button>
+    <div class="mb-3">
+      <label>Folio:</label>
+      <div class="d-flex gap-2 align-items-center">
+        <input id="idNumero" type="text" class="form-control w-auto" maxlength="3"  required>
+        <span>-</span>
+        <input id="idLetra" type="text" class="form-control w-auto" maxlength="3"  required>
       </div>
-    </form>
-  </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Edad:</label>
+      <input type="text" class="form-control" pattern="\d+" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Sexo:</label>
+      <input type="text" class="form-control" required>
+    </div>
+
+    <button id="idButon" type="button" class="btn btn-primary" onclick="enviarInfo()">Enviar</button>
+  </form>
 
   <script>
     function enviarInfo() {
-      const folio1 = document.getElementById("folio1").value;
-      const folio2 = document.getElementById("folio2").value;
-      const folioTotal = folio1 + folio2;
-
-      let contadorLetras = 0;
-      let contadorNumeros = 0;
-
-      for (let i = 0; i < folioTotal.length; i++) {
-        const char = folioTotal[i];
-        if (!isNaN(char) && char >= '0' && char <= '9') {
-          contadorNumeros++;
-        } else if (char.toLowerCase() !== char.toUpperCase()) {
-          contadorLetras++;
-        }
-      }
-
-      if (folioTotal.length !== 6 || contadorLetras !== 3 || contadorNumeros !== 3) {
-        alert(" El folio NO es valido");
-      } else {
-        alert("El folio ES valido.");
-      }
-    }
-
-    function eliminarInfo() {
-      document.getElementById("idFormulario").reset();
+      let letras = document.getElementById("idLetra").value.trim();
+      let numeros = document.getElementById("idNumero").value.trim();
+      const msg = "El folio no es valido"
+       const msg2 = "El folio  es valido"
+      const regexNumeros = /^\d{3}$/;
+      const regexLetras = /^[a-zA-Z]{3}$/;
+      regexNumeros.test(numeros) && regexLetras.test(letras) ? alert(msg2) : alert(msg);
     }
   </script>
 </body>
