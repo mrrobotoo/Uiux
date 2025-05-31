@@ -39,15 +39,11 @@
     function enviarInfo() {
       let letras = document.getElementById("idLetra").value.trim();
       let numeros = document.getElementById("idNumero").value.trim();
-
+      const msg = "El folio no es valido"
+       const msg2 = "El folio  es valido"
       const regexNumeros = /^\d{3}$/;
       const regexLetras = /^[a-zA-Z]{3}$/;
-
-      if (regexNumeros.test(numeros) && regexLetras.test(letras)) {
-        alert("El folio es valido");
-      } else {
-        alert("El folio no es valido. Debe contener exactamente 3 numeros seguidos de 3 letras.");
-      }
+      regexNumeros.test(numeros) && regexLetras.test(letras) ? alert(msg2) : alert(msg);
     }
   </script>
 </body>
